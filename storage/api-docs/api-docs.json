@@ -1,0 +1,507 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "My API",
+        "description": "Description of my API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/get_all_faqs": {
+            "get": {
+                "tags": [
+                    "FAQs"
+                ],
+                "summary": "Get all FAQs",
+                "description": "Retrieves all frequently asked questions (FAQs) from the database.",
+                "operationId": "getAllFaqs",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation. FAQs retrieved.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Status of the operation",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/get_info_o_nas": {
+            "get": {
+                "tags": [
+                    "Information"
+                ],
+                "summary": "Get information about us",
+                "description": "Retrieves information about the company or organization.",
+                "operationId": "getInfoONas",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation. Information retrieved.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Status of the operation",
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "description": "Information about the company or organization",
+                                            "properties": {
+                                                "id": {
+                                                    "description": "Unique identifier",
+                                                    "type": "integer"
+                                                },
+                                                "name": {
+                                                    "description": "Name of the company or organization",
+                                                    "type": "string"
+                                                },
+                                                "description": {
+                                                    "description": "Description of the company or organization",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/get_tours_country": {
+            "get": {
+                "tags": [
+                    "Tours"
+                ],
+                "summary": "Get list of countries for tours",
+                "description": "Retrieve a list of countries available for tours.",
+                "operationId": "getToursCountry",
+                "responses": {
+                    "200": {
+                        "description": "List of countries retrieved successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Status of the operation",
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "description": "Country ID",
+                                                        "type": "integer"
+                                                    },
+                                                    "name": {
+                                                        "description": "Country name",
+                                                        "type": "string"
+                                                    },
+                                                    "created_at": {
+                                                        "description": "Creation timestamp",
+                                                        "type": "string"
+                                                    },
+                                                    "updated_at": {
+                                                        "description": "Last update timestamp",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/get_address": {
+            "get": {
+                "tags": [
+                    "Address"
+                ],
+                "summary": "Get address data",
+                "description": "Returns address data",
+                "operationId": "getAddress",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/appl_now": {
+            "post": {
+                "tags": [
+                    "Tours"
+                ],
+                "summary": "Apply for a tour",
+                "description": "Apply for a tour by providing necessary information.",
+                "operationId": "applyNow",
+                "requestBody": {
+                    "description": "Tour application data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "tour_id",
+                                    "name",
+                                    "phone",
+                                    "email"
+                                ],
+                                "properties": {
+                                    "tour_id": {
+                                        "description": "ID of the tour to apply for",
+                                        "type": "integer"
+                                    },
+                                    "name": {
+                                        "description": "Name of the applicant",
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "description": "Phone number of the applicant",
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "description": "Email address of the applicant",
+                                        "type": "string",
+                                        "format": "email"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Application submitted successfully.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Status of the operation",
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "description": "Message indicating the result of the operation",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request. Validation errors occurred.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Status of the operation",
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "description": "Validation errors",
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/get_news": {
+            "get": {
+                "tags": [
+                    "News"
+                ],
+                "summary": "Get the latest news",
+                "description": "Returns the latest news with pagination",
+                "operationId": "getNews",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/single_page_news": {
+            "get": {
+                "tags": [
+                    "News"
+                ],
+                "summary": "Get details of a single news",
+                "description": "Retrieves details of a single news article.",
+                "operationId": "singlePageNews",
+                "parameters": [
+                    {
+                        "name": "news_id",
+                        "in": "query",
+                        "description": "ID of the news article",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation. News details retrieved.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Status of the operation",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "News article not found.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Status of the operation",
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "description": "Error message",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/get_stories": {
+            "get": {
+                "tags": [
+                    "Tours"
+                ],
+                "summary": "Get stories",
+                "description": "Retrieves stories of ongoing tours.",
+                "operationId": "getStories",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation. Stories retrieved.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Status of the operation",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/get_tour": {
+            "get": {
+                "tags": [
+                    "Tours"
+                ],
+                "summary": "Get list of tours",
+                "description": "Returns list of tours based on provided filters",
+                "operationId": "getTours",
+                "parameters": [
+                    {
+                        "name": "country_id",
+                        "in": "query",
+                        "description": "ID of the country",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "category_id",
+                        "in": "query",
+                        "description": "ID of the category",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "start_price",
+                        "in": "query",
+                        "description": "Start price range",
+                        "required": false,
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "end_price",
+                        "in": "query",
+                        "description": "End price range",
+                        "required": false,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/api/single_page_tour": {
+            "get": {
+                "tags": [
+                    "Tours"
+                ],
+                "summary": "Get details of a single tour",
+                "description": "Retrieves details of a single tour including connected hotels.",
+                "operationId": "singlePageTour",
+                "parameters": [
+                    {
+                        "name": "tour_id",
+                        "in": "query",
+                        "description": "ID of the tour",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation. Tour details retrieved.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Status of the operation",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Tour not found.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Status of the operation",
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "description": "Error message",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/get_tour_category": {
+            "get": {
+                "tags": [
+                    "Tours"
+                ],
+                "summary": "Get tour categories",
+                "description": "Retrieves all available tour categories.",
+                "operationId": "getTourCategory",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation. Tour categories retrieved.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Status of the operation",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
